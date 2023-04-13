@@ -15,6 +15,7 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "declaration": true,
+    "strictPropertyInitialization": false,
     "baseUrl": ".",
     "outDir": "./build"
   },
