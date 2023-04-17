@@ -1,11 +1,7 @@
 import { Topics } from './TopicsEnum'
+import { QuestionUpdatedData } from './data'
 
 export interface QuestionUpdated {
   topic: Topics.QuestionUpdated
-  data: {
-    id: string
-    newViewerId: string
-    updatedAt: Date
-    version: number
-  }
+  data: QuestionUpdatedData
 }

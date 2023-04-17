@@ -1,16 +1,7 @@
 import { Topics } from './TopicsEnum'
+import { UserCreatedData } from './data'
 
 export interface UserCreated {
   topic: Topics.UserCreated
-  data: {
-    id: string
-    username: string
-    avatar: {
-      url: string
-      cloudinaryId: string
-    }
-    createdAt: Date
-    updatedAt: Date
-    version: number
-  }
+  data: UserCreatedData
 }

@@ -1,8 +1,9 @@
-export interface ReactionData {
+export interface QuestionCreatedData {
   id: string
+  title: string
   body: string
   authorId: string
-  questionId: string
+  questionViewersIds: string[]
   createdAt: Date
   updatedAt: Date
   version: number

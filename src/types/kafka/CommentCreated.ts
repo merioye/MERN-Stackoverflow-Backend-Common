@@ -1,7 +1,7 @@
-import { ReactionData } from './ReactionData'
+import { ReactionCreatedData } from './data'
 import { Topics } from './TopicsEnum'
 
 export interface CommentCreated {
   topic: Topics.CommentCreated
-  data: ReactionData
+  data: ReactionCreatedData
 }
