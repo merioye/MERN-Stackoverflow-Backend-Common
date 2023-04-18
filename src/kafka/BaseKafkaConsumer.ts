@@ -14,7 +14,7 @@ export abstract class BaseKafkaConsumer<T extends Event> {
   }
 
   async listen(): Promise<void> {
-    this.consumer = this.kafka.consumer({ groupId: this.groudId })
+    this.consumer = this.kafka.consumer({ groupId: this.groudId, allowAutoTopicCreation: true })
     await this.consumer.connect()
     await this.consumer.subscribe({ topic: this.topic })
     await this.consumer.run({

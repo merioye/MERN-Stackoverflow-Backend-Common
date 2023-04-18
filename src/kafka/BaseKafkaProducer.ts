@@ -12,7 +12,7 @@ export abstract class BaseKafkaProducer<T extends Event> {
 
   async sendMessage(message: T['data']): Promise<void> {
     if (!this.producer) {
-      this.producer = this.kafka.producer()
+      this.producer = this.kafka.producer({ allowAutoTopicCreation: true })
       await this.producer.connect()
     }
     const value = JSON.stringify(message)
