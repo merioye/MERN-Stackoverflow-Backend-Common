@@ -17,6 +17,6 @@ export abstract class BaseKafkaProducer<T extends Event> {
     }
     const value = JSON.stringify(message)
     await this.producer.send({ topic: this.topic, messages: [{ value }] })
-    console.log('Message sent to Kafka:', value)
+    console.log(`Message sent to Kafka-topic: ${this.topic}`, value)
   }
 }
