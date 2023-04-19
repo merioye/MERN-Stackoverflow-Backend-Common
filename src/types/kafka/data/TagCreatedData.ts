@@ -1,7 +1,7 @@
 export interface TagCreatedData {
   id: string
   name: string
-  questionsIds: string[]
+  noOfQuestionsAsked: number
   createdAt: Date
   updatedAt: Date
   version: number
