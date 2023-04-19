@@ -6,7 +6,7 @@ type CreateTopicsParams = {
   replicationFactor: number
   kafkaAdmin: Admin
 }
-class TopicsService {
+class TopicService {
   createTopics = async ({ numPartitions, replicationFactor, kafkaAdmin }: CreateTopicsParams) => {
     await kafkaAdmin.connect()
 
@@ -20,7 +20,6 @@ class TopicsService {
           topic,
           numPartitions: numPartitions,
           replicationFactor: replicationFactor,
-          configEntries: [{ name: 'min.insync.replicas', value: '2' }],
         })),
       })
     }
@@ -33,4 +32,4 @@ class TopicsService {
   }
 }
 
-export const topicsService = new TopicsService()
+export const topicsService = new TopicService()

@@ -1,5 +1,5 @@
-import { Topics } from './TopicsEnum'
-import { ReactionCreatedData } from './data'
+import { Topics } from '../TopicsEnum'
+import { ReactionCreatedData } from '../data'
 
 export interface AnswerCreated {
   topic: Topics.AnswerCreated
