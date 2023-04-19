@@ -1,7 +1,7 @@
 import { Kafka, Consumer, EachMessagePayload } from 'kafkajs'
 import { Event } from '../types'
 
-interface MessageHandlerParams<T extends { data: any }> {
+export interface MessageHandlerParams<T extends { data: any }> {
   message: T['data']
   topic: string
   partition: number
