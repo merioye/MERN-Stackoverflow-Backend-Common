@@ -1,6 +1,6 @@
 export interface UserUpdatedData {
   id: string
-  newViewerId: string
+  newViewerId?: string
   updatedAt: Date
   version: number
 }
