@@ -16,7 +16,6 @@
     "sourceMap": true,
     "declaration": true,
     "strictPropertyInitialization": false,
-    "baseUrl": ".",
     "outDir": "./build"
   },
   "include": ["src/**/*.ts"],
