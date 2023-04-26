@@ -1,3 +1,5 @@
 export * from './BaseKafkaConsumer'
 export * from './BaseKafkaProducer'
 export * from './topicsList'
+export * from './KafkaConsumer'
+export * from './KafkaProducer'
