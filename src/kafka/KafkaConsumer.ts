@@ -6,6 +6,7 @@ import { sleep } from '../helpers'
 export class KafkaConsumer {
   private readonly kafka: Kafka
   private readonly consumer: Consumer
+  private isConnected = false
   // private readonly groupId: string
   private readonly logger: Logger
 
@@ -32,6 +33,9 @@ export class KafkaConsumer {
     topic: T['topic'],
     handleMessage: (message: T['data']) => Promise<void>, // eslint-disable-line
   ) => {
+    if (!this.isConnected) {
+      await this.connect()
+    }
     await this.consumer.subscribe({ topic, fromBeginning: true })
     await this.consumer.run({
       autoCommit: false,
@@ -57,6 +61,7 @@ export class KafkaConsumer {
   connect = async () => {
     try {
       await this.consumer.connect()
+      this.isConnected = true
     } catch (err) {
       this.logger.error('Failed to connect to kafka: ', err)
       await sleep(5000)
@@ -66,5 +71,6 @@ export class KafkaConsumer {
 
   disconnect = async () => {
     await this.consumer.disconnect()
+    this.isConnected = false
   }
 }
