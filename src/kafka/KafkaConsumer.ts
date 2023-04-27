@@ -10,8 +10,14 @@ export class KafkaConsumer {
   // private readonly groupId: string
   private readonly logger: Logger
 
-  constructor(brokers: string[], groupId: string, consumerConfig: ConsumerConfig, logger: Logger) {
-    this.kafka = new Kafka({ brokers: brokers })
+  constructor(
+    clientId: string,
+    brokers: string[],
+    groupId: string,
+    consumerConfig: ConsumerConfig,
+    logger: Logger,
+  ) {
+    this.kafka = new Kafka({ clientId, brokers })
     // this.groupId = groupId
     // this.consumer = this.kafka.consumer({
     //   groupId: this.groupId,

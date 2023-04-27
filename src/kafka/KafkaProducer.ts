@@ -9,8 +9,8 @@ export class KafkaProducer {
   private isConnected = false
   private readonly logger: Logger
 
-  constructor(brokers: string[], logger: Logger) {
-    this.kafka = new Kafka({ brokers })
+  constructor(clientId: string, brokers: string[], logger: Logger) {
+    this.kafka = new Kafka({ clientId, brokers })
     this.producer = this.kafka.producer({ allowAutoTopicCreation: true })
     this.logger = logger
   }
