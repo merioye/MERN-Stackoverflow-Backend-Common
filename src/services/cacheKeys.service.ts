@@ -10,7 +10,9 @@ export class CacheKeysService {
   deleteKeys = async (patterns: string[]): Promise<void> => {
     for (const pattern of patterns) {
       const keys = await this.client.KEYS(pattern)
-      await this.client.DEL(keys)
+      if (keys.length) {
+        await this.client.DEL(keys)
+      }
     }
     // deleting common keys created by typeorm
     // await this.client.DEL('resultsNamespace:*')

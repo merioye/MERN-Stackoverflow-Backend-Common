@@ -1,17 +1,19 @@
-import { Kafka, Producer } from 'kafkajs'
+import { Kafka, KafkaConfig, Partitioners, Producer } from 'kafkajs'
 import { Logger } from 'winston'
 import { Event } from '../types'
-import { sleep } from '../helpers'
 
 export class KafkaProducer {
   private readonly kafka: Kafka
   private readonly producer: Producer
-  private isConnected = false
   private readonly logger: Logger
+  private isConnected = false
 
-  constructor(clientId: string, brokers: string[], logger: Logger) {
-    this.kafka = new Kafka({ clientId, brokers })
-    this.producer = this.kafka.producer({ allowAutoTopicCreation: true })
+  constructor(kafkaConfig: KafkaConfig, logger: Logger) {
+    this.kafka = new Kafka(kafkaConfig)
+    this.producer = this.kafka.producer({
+      allowAutoTopicCreation: true,
+      createPartitioner: Partitioners.LegacyPartitioner,
+    })
     this.logger = logger
   }
 
@@ -29,14 +31,16 @@ export class KafkaProducer {
       await this.producer.connect()
       this.isConnected = true
     } catch (err) {
-      this.logger.error('Failed to connect to kafka: ', err)
-      await sleep(5000)
-      await this.connect()
+      this.logger.error('Failed to connect to kafka-producer: ', err)
     }
   }
 
   disconnect = async (): Promise<void> => {
-    await this.producer.disconnect()
-    this.isConnected = false
+    try {
+      await this.producer.disconnect()
+      this.isConnected = false
+    } catch (err) {
+      this.logger.error('Error while disconnecting from kafka-producer: ', err)
+    }
   }
 }
