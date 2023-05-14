@@ -44,7 +44,7 @@ export class KafkaConsumer {
       eachMessage: async ({ message, topic, partition }) => {
         try {
           const messageValue = JSON.parse(message.value!.toString())
-          console.log(`Received message from Kafka-topic: ${topic}`, messageValue)
+          this.logger.info(`Received message from Kafka-topic: ${topic}`, messageValue)
 
           const messageHandler = messageHandlers[topic as Topics]
           await messageHandler(messageValue)
